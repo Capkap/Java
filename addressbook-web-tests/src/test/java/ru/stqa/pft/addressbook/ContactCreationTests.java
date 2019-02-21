@@ -12,7 +12,7 @@ public class ContactCreationTests {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @BeforeClass(alwaysRun = true)
+  @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -33,7 +33,7 @@ public class ContactCreationTests {
   @Test
   public void testContactCreation() throws Exception {
     goToPage("add new");
-    fillContactInfo(new ContactData("Ivan", "Ivanovich", "Ivanov", "Iva66", "MFI", "Nartova", "9100000001", "Ivanov66@mail.ru"));
+    fillContactInfo(new ContactData("Ivan", "Ivanovich", "Ivanov", "Iva66", "MFI", "Nartova", "9100000001", "Ivanov66@mail.ru", "13", "February", "2000"));
     submitContact();
     goToPage("home page");
   }
@@ -59,61 +59,24 @@ public class ContactCreationTests {
     wd.findElement(By.name("mobile")).sendKeys(contactData.getMobile());
     wd.findElement(By.name("email")).clear();
     wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
-    setBithdayDate("13", "February", "2000");
-  }
-
-  private void setBithdayDate(String bday, String bmonth, String byear) {
-    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(bday);
+    new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
     wd.findElement(By.xpath("//option[@value='13']")).click();
-    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(bmonth);
+    new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
     wd.findElement(By.xpath("//option[@value='February']")).click();
     wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(byear);
+    wd.findElement(By.name("byear")).sendKeys(contactData.getByear());
   }
 
   private void goToPage(String s) {
     wd.findElement(By.linkText(s)).click();
   }
 
-  @AfterClass(alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
     wd.quit();
     String verificationErrorString = verificationErrors.toString();
     if (!"".equals(verificationErrorString)) {
       fail(verificationErrorString);
-    }
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
     }
   }
 }
