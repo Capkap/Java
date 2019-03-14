@@ -14,7 +14,9 @@ public class ContactModificationTests extends TestBase {
     public void ensurePrecondition() {
         if (app.contact().list().size() == 0) {
             app.goTo().page("add new");
-            app.contact().create(new ContactData().withFirstname("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withNickname("Iva66").withCompany("MFI").withAddress("Nartova").withMobile("9100000001").withEmail("Ivanov66@mail.ru").withBday("13").withBmonth("February").withByear("2000").withGroup("test1"));
+            app.contact().create(new ContactData()
+                    .withFirstname("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withNickname("Iva66").withCompany("MFI").withAddress("Nartova").withMobile("9100000001")
+                    .withEmail("Ivanov66@mail.ru").withBday("13").withBmonth("February").withByear("2000").withGroup("test1"));
             app.goTo().page("home page");
         }
     }
@@ -23,7 +25,9 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification() {
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
-        ContactData contact = new ContactData().withId(before.get(index).getId()).withFirstname("Oleg").withMiddlename("Olegovich").withLastname("Olegov").withNickname("Ole22").withCompany("Garda").withAddress("Gagarina").withMobile("9220000022").withEmail("Oleg22@mail.ru").withBday("22").withBmonth("February").withByear("1992").withGroup(null);
+        ContactData contact = new ContactData()
+                .withId(before.get(index).getId()).withFirstname("Oleg").withMiddlename("Olegovich").withLastname("Olegov").withNickname("Ole22").withCompany("Garda").withAddress("Gagarina")
+                .withMobile("9220000022").withEmail("Oleg22@mail.ru").withBday("22").withBmonth("February").withByear("1992");
         app.contact().modify(index, contact);
         app.goTo().page("home page");
         List<ContactData> after = app.contact().list();
