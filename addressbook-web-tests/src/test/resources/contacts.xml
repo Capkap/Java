@@ -1,0 +1,41 @@
+<list>
+  <contact>
+    <firstname>Ivan 0</firstname>
+    <middlename>Ivanovich 0</middlename>
+    <lastname>Ivanov 0</lastname>
+    <nickname>Iva 0</nickname>
+    <address>Nartova № 0</address>
+    <mobilePhone>910000000</mobilePhone>
+    <bday>10</bday>
+    <bmonth>June</bmonth>
+    <byear>2000</byear>
+    <group>test 0</group>
+    <Email1>email 0</Email1>
+  </contact>
+  <contact>
+    <firstname>Ivan 1</firstname>
+    <middlename>Ivanovich 1</middlename>
+    <lastname>Ivanov 1</lastname>
+    <nickname>Iva 1</nickname>
+    <address>Nartova № 1</address>
+    <mobilePhone>910000001</mobilePhone>
+    <bday>11</bday>
+    <bmonth>June</bmonth>
+    <byear>2001</byear>
+    <group>test 1</group>
+    <Email1>email 1</Email1>
+  </contact>
+  <contact>
+    <firstname>Ivan 2</firstname>
+    <middlename>Ivanovich 2</middlename>
+    <lastname>Ivanov 2</lastname>
+    <nickname>Iva 2</nickname>
+    <address>Nartova № 2</address>
+    <mobilePhone>910000002</mobilePhone>
+    <bday>12</bday>
+    <bmonth>June</bmonth>
+    <byear>2002</byear>
+    <group>test 2</group>
+    <Email1>email 2</Email1>
+  </contact>
+</list>
