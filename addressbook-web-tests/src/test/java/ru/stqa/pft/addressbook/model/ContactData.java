@@ -14,11 +14,30 @@ public class ContactData {
     private String homePhone;
     private String workPhone;
     private String allPhones;
-    private String email;
     private String bday;
     private String bmonth;
     private String byear;
     private String group;
+    private String Email1;
+    private String Email2;
+    private String Email3;
+    private String AllEmails;
+
+    public String getEmail1() {
+        return Email1;
+    }
+
+    public String getEmail2() {
+        return Email2;
+    }
+
+    public String getEmail3() {
+        return Email3;
+    }
+
+    public String getAllEmails() {
+        return AllEmails;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -58,10 +77,6 @@ public class ContactData {
 
     public String getAllPhones() {
         return allPhones;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getBday() {
@@ -139,8 +154,22 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withEmail(String email) {
-        this.email = email;
+    public ContactData withEmail1(String Email1) {
+        this.Email1 = Email1;
+        return this;
+    }
+    public ContactData withEmail2(String Email2) {
+        this.Email2 = Email2;
+        return this;
+    }
+
+    public ContactData withEmail3(String Email3) {
+        this.Email3 = Email3;
+        return this;
+    }
+
+    public ContactData withAllEmails(String AllEmails) {
+        this.AllEmails = AllEmails;
         return this;
     }
 
