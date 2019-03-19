@@ -43,7 +43,7 @@ public class ContactDataGenerator {
         } else if (format.equals("xml")) {
             saveAsXml(contacts, new File(file));
         } else {
-            System.out.println("Unrecognized format" + format);
+            System.out.println("Unrecognized format " + format);
         }
     }
 
@@ -69,7 +69,7 @@ public class ContactDataGenerator {
         List<ContactData> contacts = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("Ivan %s", i)).withMiddlename(String.format("Ivanovich %s", i)).withLastname(String.format("Ivanov %s", i))
-                    .withNickname(String.format("Iva %s", i)).withAddress(String.format("Nartova № %s", i)).withEmail1(String.format("email %s", i)).withMobilePhone(String.format("91000000%s", i))
+                    .withNickname(String.format("Iva %s", i)).withAddress(String.format("Nartova %s", i)).withEmail1(String.format("email %s", i)).withMobilePhone(String.format("91000000%s", i))
                     .withBday(String.format("1%s", i)).withBmonth("June").withByear(String.format("200%s", i)).withGroup(String.format("test %s", i)));
         }
         return contacts;
