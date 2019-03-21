@@ -2,32 +2,78 @@ package ru.stqa.pft.addressbook.model;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
+
 @XStreamAlias("contact")
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @XStreamOmitField
+    @Id
     private int id = Integer.MAX_VALUE;
+
     private String firstname;
+
     private String middlename;
+
     private String lastname;
+
     private String nickname;
+
     private String company;
+
+    @Type(type = "text")
     private String address;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String bday;
+
+    @Column(name = "bmonth")
     private String bmonth;
+
+    @Column(name = "byear")
     private String byear;
+
+    @Transient
     private String group;
+
+    @Column(name = "email")
+    @Type(type = "text")
     private String Email1;
+
+    @Column(name = "email2")
+    @Type(type = "text")
     private String Email2;
+
+    @Column(name = "email3")
+    @Type(type = "text")
     private String Email3;
+
+    @Transient
     private String AllEmails;
-    private File photo;
+
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
 
     public String getEmail1() {
         return Email1;
@@ -106,7 +152,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     public ContactData withId(int id) {
@@ -204,7 +250,7 @@ public class ContactData {
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
