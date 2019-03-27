@@ -11,7 +11,7 @@ public class ContactAddressTests extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        if (app.contact().all().size() == 0) {
+        if (app.db().contacts().size() == 0) {
             app.goTo().page("add new");
             app.contact().create(new ContactData()
                     .withFirstname("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withNickname("Iva66").withCompany("MFI").withAddress("Nartova").withMobilePhone("9100000001")

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ContactDataGenerator {
 
@@ -59,8 +60,8 @@ public class ContactDataGenerator {
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(), contact.getNickname(), contact.getAddress(),
-                    contact.getEmail1(),contact.getMobilePhone(),contact.getBday(),contact.getBmonth(),contact.getByear()));
+            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getMiddlename(), contact.getLastname(), contact.getNickname(), contact.getAddress(),
+                    contact.getEmail1(),contact.getMobilePhone(),contact.getHomePhone(),contact.getWorkPhone(),contact.getBday(),contact.getBmonth(),contact.getByear()));
         }
         writer.close();
     }
@@ -70,7 +71,8 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFirstname(String.format("Ivan %s", i)).withMiddlename(String.format("Ivanovich %s", i)).withLastname(String.format("Ivanov %s", i))
                     .withNickname(String.format("Iva %s", i)).withAddress(String.format("Nartova %s", i)).withEmail1(String.format("email %s", i)).withMobilePhone(String.format("91000000%s", i))
-                    .withBday(String.format("1%s", i)).withBmonth("June").withByear(String.format("200%s", i)).withGroup(String.format("test %s", i)));
+                    .withHomePhone(String.format("3213%s", i)).withWorkPhone(String.format("323-239%s", i)).withBday(String.format("1%s", i))
+                    .withBmonth("June").withByear(String.format("200%s", i)).withGroup(String.format("test %s", i)));
         }
         return contacts;
     }

@@ -152,7 +152,11 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return new File(photo);
+        if (photo == null) {
+            return null;
+        } else {
+            return new File(photo);
+        }
     }
 
     public ContactData withId(int id) {
@@ -214,6 +218,7 @@ public class ContactData {
         this.Email1 = Email1;
         return this;
     }
+
     public ContactData withEmail2(String Email2) {
         this.Email2 = Email2;
         return this;
@@ -261,12 +266,21 @@ public class ContactData {
         ContactData that = (ContactData) o;
         return id == that.id &&
                 Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
+                Objects.equals(middlename, that.middlename) &&
+                Objects.equals(lastname, that.lastname) &&
+                Objects.equals(nickname, that.nickname) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(mobilePhone, that.mobilePhone) &&
+                Objects.equals(homePhone, that.homePhone) &&
+                Objects.equals(workPhone, that.workPhone) &&
+                Objects.equals(bmonth, that.bmonth) &&
+                Objects.equals(byear, that.byear) &&
+                Objects.equals(Email1, that.Email1);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        return Objects.hash(id, firstname, middlename, lastname, nickname, address, mobilePhone, homePhone, workPhone, bmonth, byear, Email1);
     }
 
     @Override
@@ -275,9 +289,8 @@ public class ContactData {
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", bday='" + bday + '\'' +
-                ", bmonth='" + bmonth + '\'' +
-                ", byear='" + byear + '\'' +
+                ", company='" + company + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
                 '}';
     }
 }
