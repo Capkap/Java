@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -39,7 +40,10 @@ public class ContactHelper extends HelperBase {
         attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroups().size() > 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -47,6 +51,15 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactById(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
+    private void selectGroupById(int id) {
+
+        click(By.cssSelector("select[name=\"to_group\"] > option[value='" + id + "']"));
+    }
+
+    public void sortContactFromGroup(int id) {
+        click(By.cssSelector("select[name=\"group\"] > option[value='" + id + "']"));
     }
 
     public void initContactModificationById(int id) {
@@ -93,7 +106,7 @@ public class ContactHelper extends HelperBase {
     private Contacts contactCache = null;
 
     public Contacts all() {
-        if (contactCache != null){
+        if (contactCache != null) {
             return new Contacts(contactCache);
         }
 
@@ -129,4 +142,37 @@ public class ContactHelper extends HelperBase {
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address)
                 .withEmail1(email1).withEmail2(email2).withEmail3(email3);
     }
+
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContactById(contact.getId());
+        selectGroupById(group.getId());
+        confirmAdding();
+        contactCache = null;
+        goToHomePage();
+    }
+
+    public void deleteFromGroup(ContactData contact, GroupData group) {
+        sortContactFromGroup(group.getId());
+        selectContactById(contact.getId());
+        confirmRemoving();
+        contactCache = null;
+        goToHomePage();
+    }
+
+    private void goToHomePage() {
+        click(By.linkText("home"));
+    }
+
+    private void confirmAdding() {
+        click(By.xpath("//input[@value='Add to']"));
+    }
+
+    private void confirmRemoving() {
+        click(By.name("remove"));
+    }
+
+    public void showAllGroups() {
+        click(By.cssSelector("select[name=\"group\"] > option[value='']"));
+    }
+
 }

@@ -18,7 +18,7 @@ public class ContactEmailTests extends TestBase {
             app.goTo().page("add new");
             app.contact().create(new ContactData()
                     .withFirstname("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withNickname("Iva66").withCompany("MFI").withAddress("Nartova").withMobilePhone("9100000001")
-                    .withEmail1("Ivanov66@mail.ru").withEmail2("Email2@@mail.rus").withEmail3("Email43.com").withBday("13").withBmonth("February").withByear("2000").withGroup("test1"));
+                    .withEmail1("Ivanov66@mail.ru").withEmail2("Email2@@mail.rus").withEmail3("Email43.com").withBday("13").withBmonth("February").withByear("2000"));
             app.goTo().page("home page");
         }
     }
@@ -29,11 +29,12 @@ public class ContactEmailTests extends TestBase {
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+        verifyContactListInUI();
     }
 
     private String mergeEmails(ContactData contact) {
         return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
-                .stream().filter((s) -> ! s.equals(""))
+                .stream().filter((s) -> !s.equals(""))
                 .collect(Collectors.joining("\n"));
     }
 

@@ -6,7 +6,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -53,9 +55,6 @@ public class ContactData {
     @Column(name = "byear")
     private String byear;
 
-    @Transient
-    private String group;
-
     @Column(name = "email")
     @Type(type = "text")
     private String Email1;
@@ -74,6 +73,11 @@ public class ContactData {
     @Column(name = "photo")
     @Type(type = "text")
     private String photo;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<>();
 
     public String getEmail1() {
         return Email1;
@@ -141,10 +145,6 @@ public class ContactData {
 
     public String getByear() {
         return byear;
-    }
-
-    public String getGroup() {
-        return group;
     }
 
     public int getId() {
@@ -249,9 +249,8 @@ public class ContactData {
         return this;
     }
 
-    public ContactData withGroup(String group) {
-        this.group = group;
-        return this;
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public ContactData withPhoto(File photo) {
@@ -288,9 +287,21 @@ public class ContactData {
         return "ContactData{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
+                ", middlename='" + middlename + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", company='" + company + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", address='" + address + '\'' +
                 ", mobilePhone='" + mobilePhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", bmonth='" + bmonth + '\'' +
+                ", byear='" + byear + '\'' +
+                ", Email1='" + Email1 + '\'' +
                 '}';
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }

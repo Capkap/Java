@@ -15,7 +15,7 @@ public class ContactAddressTests extends TestBase {
             app.goTo().page("add new");
             app.contact().create(new ContactData()
                     .withFirstname("Ivan").withMiddlename("Ivanovich").withLastname("Ivanov").withNickname("Iva66").withCompany("MFI").withAddress("Nartova").withMobilePhone("9100000001")
-                    .withEmail1("Ivanov66@mail.ru").withBday("13").withBmonth("February").withByear("2000").withGroup("test1"));
+                    .withEmail1("Ivanov66@mail.ru").withBday("13").withBmonth("February").withByear("2000"));
             app.goTo().page("home page");
         }
     }
@@ -25,6 +25,6 @@ public class ContactAddressTests extends TestBase {
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
+        verifyContactListInUI();
     }
-
 }

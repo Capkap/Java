@@ -5,6 +5,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,25 +26,27 @@ public class ContactCreationTests extends TestBase {
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
         String xml = "";
         String line = reader.readLine();
-        while (line != null){
+        while (line != null) {
             xml += line;
             line = reader.readLine();
         }
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactData.class);
         List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
-        return contacts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+        return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
 
     @Test(dataProvider = "validContacts")
     public void testContactCreation(ContactData contact) {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         app.goTo().page("add new");
-        app.contact().create(contact);
+        app.contact().create(contact.inGroup(groups.iterator().next()));
         app.goTo().page("home page");
         assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.db().contacts();
         assertThat(after, equalTo(
                 before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+        verifyContactListInUI();
     }
 }

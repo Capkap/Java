@@ -10,9 +10,9 @@
     <workPhone>323-2390</workPhone>
     <bday>10</bday>
     <bmonth>June</bmonth>
-    <byear>2000</byear>
-    <group>test 0</group>
+    <byear>2001</byear>
     <Email1>email 0</Email1>
+    <groups/>
   </contact>
   <contact>
     <firstname>Ivan 1</firstname>
@@ -23,11 +23,11 @@
     <mobilePhone>910000001</mobilePhone>
     <homePhone>32131</homePhone>
     <workPhone>323-2391</workPhone>
-    <bday>11</bday>
+    <bday>10</bday>
     <bmonth>June</bmonth>
     <byear>2001</byear>
-    <group>test 1</group>
     <Email1>email 1</Email1>
+    <groups/>
   </contact>
   <contact>
     <firstname>Ivan 2</firstname>
@@ -38,10 +38,10 @@
     <mobilePhone>910000002</mobilePhone>
     <homePhone>32132</homePhone>
     <workPhone>323-2392</workPhone>
-    <bday>12</bday>
+    <bday>10</bday>
     <bmonth>June</bmonth>
-    <byear>2002</byear>
-    <group>test 2</group>
+    <byear>2001</byear>
     <Email1>email 2</Email1>
+    <groups/>
   </contact>
 </list>
