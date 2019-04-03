@@ -54,7 +54,6 @@ public class ContactHelper extends HelperBase {
     }
 
     private void selectGroupById(int id) {
-
         click(By.cssSelector("select[name=\"to_group\"] > option[value='" + id + "']"));
     }
 
