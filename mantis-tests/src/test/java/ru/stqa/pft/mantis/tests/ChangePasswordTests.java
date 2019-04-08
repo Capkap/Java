@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
 import ru.stqa.pft.mantis.appmanager.HttpSession;
 import ru.stqa.pft.mantis.model.MailMessage;
+import ru.stqa.pft.mantis.model.UserData;
+import ru.stqa.pft.mantis.model.Users;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -24,12 +26,15 @@ public class ChangePasswordTests extends TestBase {
     public void testChangePassword() throws IOException, MessagingException {
         HttpSession session = app.newSession();
         String newPassword = "newPassword";
+
+        app.getDriver();
         app.session().login("administrator", "root");
+        Users listOfUsers  = app.db().users();
+        UserData selectedUser = listOfUsers.iterator().next();
+        String user = selectedUser.getUsername();
+        String email = selectedUser.getEmail();
         app.passwordHelper().goToManageUsersPage();
-        app.passwordHelper().chooseUser(3);
-        String user = app.passwordHelper().getUserName();
-        String email = app.passwordHelper().getMail();
-        app.passwordHelper().resetPassword();
+        app.passwordHelper().resetPassword(user);
         List<MailMessage> mailMessages = app.mail().waitForMail(1, 20000);
         String resetPasswordLink = findResetPasswordLink(mailMessages, email);
 

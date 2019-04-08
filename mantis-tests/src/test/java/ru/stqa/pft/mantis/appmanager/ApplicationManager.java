@@ -22,6 +22,7 @@ public class ApplicationManager {
     private JamesHelper jamesHelper;
     private ChangePasswordHelper passwordHelper;
     private SessionHelper sessionHelper;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -31,6 +32,7 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src\\test\\resources\\local.properties", target))));
+        dbHelper = new DbHelper();
     }
 
     public void stop() {
@@ -87,6 +89,10 @@ public class ApplicationManager {
             sessionHelper = new SessionHelper(this);
         }
         return sessionHelper;
+    }
+
+    public DbHelper db() {
+        return dbHelper;
     }
 
     public WebDriver getDriver() {

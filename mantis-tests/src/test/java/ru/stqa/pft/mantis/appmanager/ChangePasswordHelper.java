@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 
 public class ChangePasswordHelper extends HelperBase {
 
+    private String username;
+
     public ChangePasswordHelper(ApplicationManager app) {
         super(app);
     }
@@ -19,8 +21,11 @@ public class ChangePasswordHelper extends HelperBase {
         user.click();
     }
 
-    public void resetPassword() {
-        wd.findElement(By.cssSelector("input[value='Reset Password']")).click();
+    public void resetPassword(String user) {
+        this.username = user;
+        click(By.linkText(username));
+        click(By.cssSelector("input[value='Reset Password']"));
+//        wd.findElement(By.cssSelector("input[value='Reset Password']")).click();
     }
 
     public String getUserName() {
