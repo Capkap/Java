@@ -20,6 +20,8 @@ public class ApplicationManager {
     private FtpHelper ftp;
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
+    private ChangePasswordHelper passwordHelper;
+    private SessionHelper sessionHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -71,6 +73,20 @@ public class ApplicationManager {
             jamesHelper = new JamesHelper(this);
         }
         return jamesHelper;
+    }
+
+    public ChangePasswordHelper passwordHelper() {
+        if (passwordHelper == null) {
+            passwordHelper = new ChangePasswordHelper(this);
+        }
+        return passwordHelper;
+    }
+
+    public SessionHelper session() {
+        if(sessionHelper == null){
+            sessionHelper = new SessionHelper(this);
+        }
+        return sessionHelper;
     }
 
     public WebDriver getDriver() {
