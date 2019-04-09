@@ -10,6 +10,7 @@ import ru.stqa.pft.mantis.model.UserData;
 import ru.stqa.pft.mantis.model.Users;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class ChangePasswordTests extends TestBase {
     }
 
     @Test
-    public void testChangePassword() throws IOException, MessagingException {
+    public void testChangePassword() throws IOException, MessagingException, ServiceException {
         HttpSession session = app.newSession();
         String newPassword = "newPassword";
-
+        skipIfNotFixed(0000003);
         app.getDriver();
         app.session().login("administrator", "root");
         Users listOfUsers  = app.db().users();
