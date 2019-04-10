@@ -1,4 +1,4 @@
-package ru.stqa.pfr.rest;
+package ru.stqa.pft.rest;
 
 public class Issue {
 
